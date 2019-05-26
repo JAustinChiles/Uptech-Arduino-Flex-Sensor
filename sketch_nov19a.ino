@@ -1,6 +1,13 @@
 #include <Servo.h>
 Servo myServo;
 
+
+//This code uses voltages from a flex sensor to calculate the angle of the sensor, and the number of times
+//a persons hand has been opened and closed. The data is saved as a CSV file to easily be graphed in excel,
+//which is why the data is outputed as numbers seperated by commas.
+
+
+
 const int flexPin = A0; 
 const int ledPin = 7; 
 bool closed = false;
@@ -37,12 +44,9 @@ void loop()
   //Serial.print(flexValue);
   //Serial.print(", ");
 
-  //calculates angle of sensor
+  //calculates angle of sensor, using quadratic regression
 
-  //angle = (((0.63172 * flexValue) - 105.28596 ));
-  //angle = ( 213.061 + ( -2.051 * flexValue) + (0.0025 * flexValue));
   angle = ( 127.484 + ( -0.778 * flexValue) + (0.0122 * flexValue));
-  //angle = ( 121.165 + ( -1.139 * flexValue) + (0.0079 * flexValue));
 
 
 
@@ -65,9 +69,6 @@ void loop()
     minOpen = angle;
   }
 
-
-
-  //Serial.println(flexValue);
 
 
   //display angle of sensor in degrees
